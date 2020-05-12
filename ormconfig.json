@@ -1,0 +1,15 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "lenovot61",
+    "database": "moviesapp",
+    "entities": ["dist/**/*.entity.js"],
+    "synchronize": false,
+    "migrationRun": true,
+    "migrations": ["migration/*ts"],
+    "cli": {
+        "migrationsDir": "migration"
+    }
+}
