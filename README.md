@@ -3,11 +3,11 @@
 <p align="center">
 
 
- ## Created by
+ # Created by
  Erick Mgongo 
  Fullstack Web Developer
 
-  ## Created with
+  # Created with
   Node
   Nestjs
   Postgres DBMS
@@ -26,7 +26,6 @@ The achitecture is in moduler way where each entity of the database is treated a
     • Country_id
     • IMDB
     • Use_id
-    • Link
     • Cover
     • Photo
 
@@ -40,7 +39,9 @@ The achitecture is in moduler way where each entity of the database is treated a
     • Episode_id
     • Name
     • Number
+    • Link
     • Season_id
+    
 
 ## GENRE
     • Genre_id
