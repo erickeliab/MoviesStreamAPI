@@ -159,5 +159,6 @@ temp/
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+ormconfig.json
 
 # End of https://www.gitignore.io/api/node,linux,angular,visualstudiocode
