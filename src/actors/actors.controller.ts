@@ -42,4 +42,6 @@ export class ActorsController {
                 remove(@Param() param) : Promise<void> {
                     return this.actorsService.remove(param.id);
                 }
+
+                
 }

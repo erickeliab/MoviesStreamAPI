@@ -1,18 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { Movie } from './movies.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Connection } from 'typeorm';
 import { CreateMovieDto } from './DTO/createMovieDto';
 
 import { from } from 'rxjs';
+import { Genre } from 'src/genres/genre.entity';
+import { GenresService } from 'src/genres/genres.service';
 
 
 @Injectable()
 export class MoviesService {
 
     constructor ( 
+        
         @InjectRepository(Movie)
-        private movieRepository : Repository<Movie>
+        private movieRepository : Repository<Movie>,
+        private connection : Connection, private genreSer : GenresService
     ){}
 
 
@@ -25,7 +29,11 @@ export class MoviesService {
     }
 
     async add(body : CreateMovieDto) : Promise<Movie>{
-         
+        
+        const genre1 = new Genre();
+        genre1.Name = 'Adventure';
+        this.genreSer.add(genre1);
+
         var movie = new Movie();
        
         movie.Name = body.Name;
@@ -36,6 +44,7 @@ export class MoviesService {
         movie.Cover = body.Cover;
         movie.Photo = body.Photo;
         movie.Deleted = body.Deleted;
+        movie.genres = [genre1];
         return await this.movieRepository.save(movie);
 
     }

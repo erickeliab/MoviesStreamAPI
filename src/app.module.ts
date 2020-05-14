@@ -22,14 +22,18 @@ import { Country } from  './countries/countries.entity';
 import { Director } from './directors/director.entity';
 import { Genre } from  './genres/genre.entity';
 import { Episode } from './episodes/episode.entity';
+import { Connection } from  'typeorm';
 
 
 @Module({
   imports: [MoviesModule,SeasonsModule,PermissionsModule,RolesModule,
     UsersModule,ActorsModule,CountriesModule, DirectorsModule,GenresModule,
     EpisodesModule,
-    TypeOrmModule.forRoot()],
+    TypeOrmModule.forRoot()
+    ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {}
+}

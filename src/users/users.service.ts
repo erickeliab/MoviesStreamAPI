@@ -5,6 +5,7 @@ import { userDto } from './DTO/userDto';
 import { User } from './user.entity';
 
 import { from } from 'rxjs';
+import { users } from './userdata';
 
 
 @Injectable()
@@ -17,6 +18,7 @@ export class UsersService {
 
 
      async getall() : Promise<User[]> {
+        
         return await this.userRepository.find();
     }
 
@@ -25,7 +27,8 @@ export class UsersService {
     }
 
     async add(body : userDto) : Promise<User>{
-         
+       
+
         var user = new User();
                 
         user.Name = body.Name;
@@ -33,7 +36,11 @@ export class UsersService {
         user.Phone= body.Phone;
         
         user.Email= body.Email;
-       
+
+        user.Password = body.Password;
+
+        user.Verifymail= body.Verifymail;
+
         user.Deleted = body.Deleted;
         
         return await this.userRepository.save(user);

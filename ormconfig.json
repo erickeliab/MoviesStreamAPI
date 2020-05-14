@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "lenovot61",
-    "database": "moviesapp",
+    "database": "moviestest",
     "entities": ["dist/**/*.entity.js"],
     "synchronize": false,
     "migrationRun": true,

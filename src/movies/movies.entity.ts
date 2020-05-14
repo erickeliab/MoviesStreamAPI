@@ -7,6 +7,7 @@ import { User } from 'src/users/user.entity';
 import { Actor } from 'src/actors/actors.entity';
 import { Permission } from 'src/permissions/permission.entity';
 
+
 @Entity()
 export class Movie {
   @PrimaryGeneratedColumn()
@@ -44,9 +45,6 @@ export class Movie {
   @OneToMany(type => Season, season => season.movie)
   seasons : Season[];
 
-  @ManyToMany(type => Genre)
-  @JoinTable()
-  genres : Genre[];
 
   @ManyToMany(type => Director)
   @JoinTable()
@@ -56,7 +54,8 @@ export class Movie {
   @JoinTable()
   actors : Actor[];
 
-  @ManyToMany(type => User)
+
+  @ManyToMany(type => Genre)
   @JoinTable()
-  users : User[];
+  genres : Genre[];
 }

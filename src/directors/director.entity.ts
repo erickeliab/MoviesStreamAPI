@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,ManyToMany } from 'typeorm';
+import { Movie } from 'src/movies/movies.entity';
 
 @Entity()
 export class Director {
@@ -10,4 +11,7 @@ export class Director {
 
   @Column({ default: false })
   Deleted : boolean; 
+
+  @ManyToMany(type => Movie)
+  movies : Movie[];
 }

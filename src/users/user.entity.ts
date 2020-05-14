@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn,ManyToOne } from 'typeorm';
 import { Permission } from 'src/permissions/permission.entity';
+import { type } from 'os';
 
 @Entity()
 export class User {
@@ -10,15 +11,22 @@ export class User {
   Name : string; 
 
   @Column()
-  Phone: number;
+  Phone: string;
 
   @Column()
   Email: string;
+
+  @Column()
+  Password : string;
+    
+  @Column()
+  Verifymail : string;
 
 
   @Column({ default: false })
   Deleted : boolean; 
 
-  @ManyToOne(type => Permission, permission => permission.users)
+  @ManyToOne(type => Permission, perm => perm.users)
   permission : Permission;
+
 }
