@@ -1,13 +1,13 @@
- ## The Mgongo Movie Series Stream API
+ # The Mgongo Movie Series Stream API
 
 <p align="center">
 
 
- ## Created by
+ ### Created by
  Erick Mgongo 
  Fullstack Web Developer
 
-  ## Created with
+  ### Created with
   Node
   Nestjs
   Postgres DBMS
@@ -19,67 +19,68 @@ The achitecture is in moduler way where each entity of the database is treated a
 
 ## DATABASE DESIGN
 
-## MOVIE
+### MOVIE
     • Movie_id 
     • Name
     • Description
     • Country_id
     • IMDB
     • Use_id
-    • Link
     • Cover
     • Photo
 
-## SEASONS
+### SEASONS
     • Season_id
     • Name
     • Number
     • Movie_id
 
-## EPISODES
+### EPISODES
     • Episode_id
     • Name
     • Number
+    • Link
     • Season_id
+    
 
-## GENRE
+### GENRE
     • Genre_id
     • Name
     • User_id
 
-## TYPE
+### TYPE
     • Type_id
     • Movie_id
     • Genre_id
 
-## ACTOR
+### ACTOR
     • Actor_id
     • Name
-## CAST
+### CAST
     • Cast_id
     • Movie_id
     • Actor_id
 
-## DIRECTORS
+### DIRECTORS
     • Director_id
     • Name
 
-## STAFF
+### STAFF
     • Staff_id
     • Movie_id
     • Actor_id
 
-## COUNTRIES
+### COUNTRIES
     • Country_id
     • Name
 
-## USERS
+### USERS
     • User_id
     • Name
     • Phone
     • Email
 
-## ROLES
+### ROLES
     • Role_id
     • Crud_users : bool
     • Crud_movies : bool
@@ -89,7 +90,7 @@ The achitecture is in moduler way where each entity of the database is treated a
     • Crud_actors : bool
     • Crud_directors : bool
 
-## PERMISSION
+### PERMISSION
     • Permission_id
     • User_id
     • Role_id

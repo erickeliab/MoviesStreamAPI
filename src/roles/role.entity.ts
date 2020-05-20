@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Permission } from 'src/permissions/permission.entity';
+import { Users } from 'src/users/user.entity';
 
 @Entity()
 export class Role {
@@ -31,8 +32,10 @@ export class Role {
   @Column({ default: false })
   Deleted : boolean; 
 
+  @OneToMany(type => Permission, perm => perm.role)
+  permissions : Permission[];
 
-  @ManyToOne(type => Permission, permission => permission.roles)
-  permission : Permission;
+  
+ 
 }
 

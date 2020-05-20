@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn,ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,ManyToOne, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Permission } from 'src/permissions/permission.entity';
 import { type } from 'os';
+import { Role } from 'src/roles/role.entity';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   User_id: number; 
 
@@ -23,10 +24,10 @@ export class User {
   Verifymail : string;
 
 
-  @Column({ default: false })
+  @Column({ default: false , nullable : true})
   Deleted : boolean; 
 
-  @ManyToOne(type => Permission, perm => perm.users)
-  permission : Permission;
+  @OneToMany(type => Permission, perm => perm.user)
+  permissions : Permission[];
 
 }

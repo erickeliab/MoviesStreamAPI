@@ -1,7 +1,7 @@
 import { Controller, Get, Post,Put ,Delete, Param,Body } from '@nestjs/common';
 import {UsersService } from './users.service';
 import { userDto } from './DTO/userDto';
-import { User } from './user.entity';
+import { Users } from './user.entity';
 
 
 @Controller('users')
@@ -13,20 +13,20 @@ export class UsersController {
 
                     // get all the movies
                 @Get()
-                getall() : Promise<User[]> {
+                getall() : Promise<Users[]> {
                     return this.usersService.getall();
                 }
                 
                 
                 // get a single movie
                 @Get('/:id')
-                getOne( @Param('id') id):Promise<User> {
+                getOne( @Param('id') id):Promise<Users> {
                     return this.usersService.getOne(id);
                 }
                 
                 // add movie
                 @Post()
-                add(@Body() body : userDto ): Promise<User> {
+                add(@Body() body : userDto ): Promise<Users> {
                 return this.usersService.add(body);
                 }
                 

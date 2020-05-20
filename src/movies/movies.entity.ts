@@ -3,7 +3,7 @@ import { Country } from 'src/countries/countries.entity';
 import { Season } from 'src/seasons/seasons.entity';
 import { Genre } from 'src/genres/genre.entity';
 import { Director } from 'src/directors/director.entity';
-import { User } from 'src/users/user.entity';
+import { Users } from 'src/users/user.entity';
 import { Actor } from 'src/actors/actors.entity';
 import { Permission } from 'src/permissions/permission.entity';
 
@@ -55,7 +55,9 @@ export class Movie {
   actors : Actor[];
 
 
-  @ManyToMany(type => Genre)
-  @JoinTable()
+  @ManyToMany(
+    type => Genre,
+    genres => genres.movies,
+    {nullable: false},)
   genres : Genre[];
 }

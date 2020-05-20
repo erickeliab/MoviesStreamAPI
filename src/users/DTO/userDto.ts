@@ -6,6 +6,6 @@ export class userDto{
     Email: string;
     Password: string;
     Verifymail: string;
-    Deleted : boolean
+    Deleted : boolean;
 }
 

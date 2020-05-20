@@ -12,16 +12,6 @@ import { ActorsModule } from './actors/actors.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
-import { Movie } from  './movies/movies.entity';
-import { Season } from './seasons/seasons.entity';
-import { Permission } from  './permissions/permission.entity';
-import { Role } from './roles/role.entity';
-import { User } from  './users/user.entity';
-import { Actor } from './actors/actors.entity';
-import { Country } from  './countries/countries.entity';
-import { Director } from './directors/director.entity';
-import { Genre } from  './genres/genre.entity';
-import { Episode } from './episodes/episode.entity';
 import { Connection } from  'typeorm';
 
 

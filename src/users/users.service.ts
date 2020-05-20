@@ -1,49 +1,74 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Connection } from 'typeorm';
 import { userDto } from './DTO/userDto';
-import { User } from './user.entity';
+import { Users } from './user.entity';
 
 import { from } from 'rxjs';
 import { users } from './userdata';
+import { Permission } from 'src/permissions/permission.entity';
+import { Role } from 'src/roles/role.entity';
 
 
 @Injectable()
 export class UsersService {
 
     constructor ( 
-        @InjectRepository(User)
-        private userRepository : Repository<User>
+        @InjectRepository(Users)
+        private userRepository : Repository<Users>,
+        private connection : Connection
     ){}
 
 
-     async getall() : Promise<User[]> {
+     async getall() : Promise<Users[]> {
         
         return await this.userRepository.find();
     }
 
-    async getOne(id : Number) : Promise<User> {
-        return this.userRepository.findOne();
+    async getOne(id : string) : Promise<Users> {
+        return this.userRepository.findOne(id);
     }
 
-    async add(body : userDto) : Promise<User>{
-       
+    async add(body : userDto) : Promise<Users>{
 
-        var user = new User();
+        var role = new Role();
+        role.Crud_actors = true;
+        role.Crud_countries = true;
+        role.Crud_directors = true;
+        role.Crud_episodes = true;
+        role.Crud_movies = true;
+        role.Crud_seasons = true;
+        role.Crud_users = true;
+        role.Deleted = false;
+        await this.connection.manager.save(role);
+
+        var user = new Users();
                 
         user.Name = body.Name;
 
-        user.Phone= body.Phone;
+        user.Phone = body.Phone;
         
-        user.Email= body.Email;
+        user.Email = body.Email;
 
         user.Password = body.Password;
 
-        user.Verifymail= body.Verifymail;
+        user.Verifymail = body.Verifymail;
+        
 
         user.Deleted = body.Deleted;
+
         
-        return await this.userRepository.save(user);
+         await this.userRepository.save(user);
+
+         var permission = new Permission();
+         permission.Name = 'Super Admin';
+         permission.role = role;
+         permission.Deleted = false;
+         permission.User_id = user.User_id;
+         permission.Role_id = role.Role_id;
+         await this.connection.manager.save(permission);
+
+         return await this.userRepository.findOne(user.User_id,{relations : ['permissions']});
 
     }
 

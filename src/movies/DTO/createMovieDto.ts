@@ -1,4 +1,5 @@
 import { Country } from "src/countries/countries.entity";
+import { Genre } from "src/genres/genre.entity";
 
 export class CreateMovieDto{
 
@@ -12,5 +13,6 @@ export class CreateMovieDto{
     public readonly Photo : string; 
     public readonly Deleted : boolean; 
     public readonly country : Country;
+    public readonly genres : Genre[];
    
 }

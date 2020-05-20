@@ -13,7 +13,13 @@ export class Genre {
   @Column({ default: false })
   Deleted : boolean; 
 
-  @ManyToMany(type => Movie)
+  @ManyToMany(
+    type => Movie,
+    movie => movie.genres,
+    {nullable : false},)
+
+    @JoinTable({name : 'type'})
+
   movies : Movie[];
   
 }

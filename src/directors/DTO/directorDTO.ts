@@ -1,3 +1,4 @@
+import { Movie } from "src/movies/movies.entity";
 
 export class directorDto {
   
@@ -6,4 +7,6 @@ export class directorDto {
   Name : string; 
 
   Deleted : boolean; 
+
+  movies : Movie[];
 }

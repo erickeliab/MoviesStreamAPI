@@ -1,0 +1,16 @@
+{
+  "type": "",
+  "host": "",
+  "port": "",
+  "username": "",
+  "password": "",
+  "database": "",
+  "entities": ["dist/**/*.entity.js"],
+  "synchronize": false,
+  "migrationRun": true,
+  "migrations": ["src/database/migration/**/*.ts"],
+  "cli": {
+    "migrationsDir": "src/database/migration",
+    "entitiesDir": "src/**/*.entity.ts"
+  }
+}

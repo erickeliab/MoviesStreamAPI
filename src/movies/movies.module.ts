@@ -5,13 +5,15 @@ import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './movies.entity';
 import { GenresModule } from '../genres/genres.module';
+import { GenresService } from '../genres/genres.service';
+
 
 @Module({
   imports: [TypeOrmModule.forFeature([Movie]),GenresModule],
   controllers: [ MoviesController],
   providers: [ MoviesService],
-  exports : [Connection]
+  exports : []
 })
 export class MoviesModule {
-  constructor(private connection: Connection) {}
+  
 }
