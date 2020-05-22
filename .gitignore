@@ -34,7 +34,7 @@ e2e/*.map
 
 ## Config folder
 
-src/config
+src/config/
 ### Linux ###
 *~
 
