@@ -32,6 +32,9 @@ e2e/*.map
 #System Files
 .DS_Store/
 
+## Config folder
+
+src/config
 ### Linux ###
 *~
 
