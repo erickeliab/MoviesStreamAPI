@@ -1,15 +1,18 @@
 import { Module } from '@nestjs/common';
 import { MoviesController } from './movies.controller';
 import { MoviesService } from './movies.service';
-import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './movies.entity';
-import { GenresModule } from '../genres/genres.module';
-import { GenresService } from '../genres/genres.service';
+import { AuthModule } from '../auth/auth.module';
+import { UsersModule } from '../users/users.module';
+import { PassportModule } from '@nestjs/passport';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Movie]),GenresModule],
+  imports: [TypeOrmModule.forFeature([Movie]),
+  AuthModule,
+  UsersModule,
+  PassportModule.register({ defaultStrategy: 'jwt' })],
   controllers: [ MoviesController],
   providers: [ MoviesService],
   exports : []

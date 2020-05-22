@@ -3,7 +3,7 @@ import {
     IsEmail
 } from 'class-validator';
 
-export class userDto{
+export class userReg{
 
     @IsNotEmpty()
     User_id: number; 
@@ -15,15 +15,16 @@ export class userDto{
     Phone: string;
 
     @IsNotEmpty()
+    Password: string;
+
+    @IsNotEmpty()
     @IsEmail()
     Email: string;
 
     @IsNotEmpty()
     @IsEmail()
     Verifymail: string;
-
+    
     Deleted : boolean;
-
-    createdOn?: Date;
 }
 

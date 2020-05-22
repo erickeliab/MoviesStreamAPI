@@ -1,7 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn,ManyToOne, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import { 
+      Entity,
+      Column, 
+      PrimaryGeneratedColumn,
+      CreateDateColumn,
+      BeforeInsert,
+      OneToMany
+     } from 'typeorm';
 import { Permission } from 'src/permissions/permission.entity';
-import { type } from 'os';
-import { Role } from 'src/roles/role.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class Users {
@@ -23,11 +29,17 @@ export class Users {
   @Column()
   Verifymail : string;
 
+  @CreateDateColumn() createdOn?: Date;
+  @CreateDateColumn() updatedOn?: Date;
 
-  @Column({ default: false , nullable : true})
+  @Column({ default: false })
   Deleted : boolean; 
 
   @OneToMany(type => Permission, perm => perm.user)
   permissions : Permission[];
 
+  @BeforeInsert()  async hashPassword() {
+    this.Password = await bcrypt.hash(this.Password, 10);  
+  }
+  
 }

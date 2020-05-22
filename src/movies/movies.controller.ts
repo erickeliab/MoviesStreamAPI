@@ -1,7 +1,18 @@
-import { Controller, Get , Post, Put, Delete, Param , Body } from '@nestjs/common';
+import { 
+        Controller,
+        Get , 
+        Post,
+        Put,
+        Delete,
+        Param , 
+        Body , 
+        UseGuards,
+        Headers
+     } from '@nestjs/common';
 import { CreateMovieDto } from "./DTO/createMovieDto";
 import { Movie } from './movies.entity';
 import { MoviesService } from './movies.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('movies')
 export class MoviesController {
@@ -23,8 +34,11 @@ getOne( @Param('id') id):Promise<Movie> {
 }
 
 // add movie
+ @UseGuards(AuthGuard())
 @Post()
-add(@Body() body : CreateMovieDto ): Promise<Movie> {
+add(@Body() body : CreateMovieDto , @Headers() headers): Promise<Movie> {
+
+console.log(headers);
 return this.moviesService.add(body);
 }
 

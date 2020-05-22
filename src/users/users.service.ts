@@ -1,13 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,HttpException , HttpStatus} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Connection } from 'typeorm';
 import { userDto } from './DTO/userDto';
 import { Users } from './user.entity';
-
-import { from } from 'rxjs';
-import { users } from './userdata';
+import { userReg } from './DTO/userReg.Dto';
+import { userLogin } from './DTO/userLogin.Dto';
 import { Permission } from 'src/permissions/permission.entity';
 import { Role } from 'src/roles/role.entity';
+import { comparePasswords } from '../shared/utils';
+import { toUserDto } from '../shared/mapper';
 
 
 @Injectable()
@@ -20,16 +21,45 @@ export class UsersService {
     ){}
 
 
-     async getall() : Promise<Users[]> {
+     async getall() : Promise<userDto[]> {
         
         return await this.userRepository.find();
     }
 
-    async getOne(id : string) : Promise<Users> {
+    async getOne(id : string) : Promise<userDto> {
         return this.userRepository.findOne(id);
     }
 
-    async add(body : userDto) : Promise<Users>{
+    async findByLogin({ Email , Password }: userLogin): Promise<userDto> {
+        const user = await this.userRepository.findOne({ where: { Email } });
+    
+        if (!user) {
+          throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+        }
+    
+        // compare passwords
+        const areEqual = await comparePasswords(user.Password, Password);
+    
+        if (!areEqual) {
+          throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+        }
+    
+        return toUserDto(user);
+      }
+
+      async findByPayload({ Email }: any): Promise<userDto> {
+        return await this.userRepository.findOne({ where: { Email } });
+      }
+
+
+    async add(body : userReg) : Promise<Users>{
+      const { Email } = body;
+         // check if the user exists in the db
+              
+         const userInDb = await this.userRepository.findOne({ where: { Email } });
+         if (userInDb) {
+         throw new HttpException('Email already taken', HttpStatus.BAD_REQUEST);
+       }
 
         var role = new Role();
         role.Crud_actors = true;
@@ -41,6 +71,8 @@ export class UsersService {
         role.Crud_users = true;
         role.Deleted = false;
         await this.connection.manager.save(role);
+
+     
 
         var user = new Users();
                 
@@ -57,7 +89,7 @@ export class UsersService {
 
         user.Deleted = body.Deleted;
 
-        
+     
          await this.userRepository.save(user);
 
          var permission = new Permission();

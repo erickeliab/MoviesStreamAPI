@@ -12,6 +12,7 @@ import { ActorsModule } from './actors/actors.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
+import { AuthModule } from './auth/auth.module';
 import { Connection } from  'typeorm';
 
 
@@ -19,7 +20,8 @@ import { Connection } from  'typeorm';
   imports: [MoviesModule,SeasonsModule,PermissionsModule,RolesModule,
     UsersModule,ActorsModule,CountriesModule, DirectorsModule,GenresModule,
     EpisodesModule,
-    TypeOrmModule.forRoot()
+    TypeOrmModule.forRoot(),
+    AuthModule
     ],
   controllers: [AppController],
   providers: [AppService],
