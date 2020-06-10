@@ -25,7 +25,7 @@ export class MoviesService {
 
 
      async getall() : Promise<Movie[]> {
-        return await this.movieRepository.find();
+        return await this.movieRepository.find({relations: ['country','genres']});
     }
 
     async getOne(id : string) : Promise<Movie> {
