@@ -5,7 +5,7 @@
   "username": "",
   "password": "",
   "database": "",
-  "entities": ["dist/**/*.entity.js"],
+  "entities": ["src/**/*.entity.ts"],
   "synchronize": false,
   "migrationRun": true,
   "migrations": ["src/database/migration/**/*.ts"],
